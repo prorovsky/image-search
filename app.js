@@ -8,7 +8,7 @@ var options = {
     headers: {
         Authorization: 'Client-ID ' + process.env.CLIENTID
     }
-}
+};
 
 app.get('/', function(req, res){
 
@@ -16,8 +16,9 @@ app.get('/', function(req, res){
 
 });
 
-app.get('api/imagesearch/:query', function(req, res){
+app.get('/api/imagesearch/:query', function(req, res){
 
+    // res.send('hello query');
     request(options, getData);
     function getData(err, response, body){
         if (!error && response.statusCode == 200) {
@@ -27,10 +28,10 @@ app.get('api/imagesearch/:query', function(req, res){
     }
 });
 
-app.get('api/latest/imagesearch/', function(req, res){
+app.get('/api/latest/imagesearch/', function(req, res){
 
     // request db for user's history
-
+    res.send('history');
 });
 
 app.listen(process.env.PORT || 3000, function(){
