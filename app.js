@@ -4,7 +4,7 @@ var express = require('express'),
     mongoose = require('mongoose');
 
 var options = {
-    url: ' https://api.imgur.com/3/gallery/t/funny/viral/1',
+    url: `https://api.imgur.com/3/gallery/t/${userReq}/viral/${page}`,
     headers: {
         Authorization: 'Client-ID ' + process.env.CLIENTID
     }
@@ -16,9 +16,9 @@ app.get('/', function(req, res){
 
 });
 
-app.get('/api/imagesearch/:query', function(req, res){
-
-    // res.send('hello query');
+app.get('/api/imagesearch/:query/:page', function(req, res){
+    var userReq = req.params.query;
+    var page = req.params.page;
     request(options, getData);
     function getData(err, response, body){
         if (!err && response.statusCode == 200) {
