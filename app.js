@@ -6,7 +6,7 @@ var express = require('express'),
 var options = {
     url: ' https://api.imgur.com/3/gallery/t/funny/viral/1',
     headers: {
-        Authorization: 'Client-ID ' + CLIENTID
+        Authorization: 'Client-ID ' + process.env.CLIENTID
     }
 }
 
