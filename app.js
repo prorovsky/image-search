@@ -22,8 +22,8 @@ app.get('/api/imagesearch/:query', function(req, res){
     request(options, getData);
     function getData(err, response, body){
         if (!err && response.statusCode == 200) {
-            // var info = JSON.parse(body);
-            res.json(body);
+            var info = JSON.parse(body);
+            res.send(info);
         }
     }
 });
