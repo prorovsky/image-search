@@ -2,7 +2,9 @@ var express = require('express'),
     app = express(),
     request = require('request'),
     config = require('./config'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    mainUrl = 'https://www.googleapis.com/customsearch/v1?q=',
+    image = '&searchType=image';
 
 // db
 var dburl = process.env.DATABASEURL || "mongodb://localhost/fcc-backend";
@@ -19,9 +21,12 @@ var searchSchema = new mongoose.Schema({
 });
 var Search = mongoose.model('Search', searchSchema);
 
+//file server
+app.use(express.static('./public'));
+
 // routes
-app.get('/:hello', function(req, res){
-    res.send('hello');
+app.get('/', function(req, res){
+    res.render('index.html');
 });
 
 app.get('/api/imagesearch/:query', function(req, res){
@@ -47,7 +52,8 @@ function goGoogle(req, res){
         offset = 1;
     } 
     var options = {
-        url: `${config.mainUrl}${userSearch}${config.SEID}${config.image}&start=${offset}${config.APIKEY}` 
+        url: `${mainUrl}${userSearch}${config.SEID}${image}&start=${offset}${config.APIKEY}` 
+        // url: `${mainUrl}${userSearch}${process.env.SEID}${image}&start=${offset}${process.env.APIKEY}` 
     };
 
     request(options, getData);
