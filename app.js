@@ -1,7 +1,7 @@
 var express = require('express'),
     app = express(),
     request = require('request'),
-    config = require('./config'),
+    // config = require('./config'),
     mongoose = require('mongoose'),
     mainUrl = 'https://www.googleapis.com/customsearch/v1?q=',
     image = '&searchType=image',
