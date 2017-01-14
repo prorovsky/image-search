@@ -4,7 +4,9 @@ var express = require('express'),
     config = require('./config'),
     mongoose = require('mongoose'),
     mainUrl = 'https://www.googleapis.com/customsearch/v1?q=',
-    image = '&searchType=image';
+    image = '&searchType=image',
+    apikey = process.env.APIKEY || config.APIKEY,
+    seid = process.env.SEID || config.SEID;
 
 // db
 var dburl = process.env.DATABASEURL || "mongodb://localhost/fcc-backend";
@@ -52,8 +54,7 @@ function goGoogle(req, res){
         offset = 1;
     } 
     var options = {
-        url: `${mainUrl}${userSearch}${config.SEID}${image}&start=${offset}${config.APIKEY}` 
-        // url: `${mainUrl}${userSearch}${process.env.SEID}${image}&start=${offset}${process.env.APIKEY}` 
+        url: `${mainUrl}${userSearch}${seid}${image}&start=${offset}${apikey}` 
     };
 
     request(options, getData);
